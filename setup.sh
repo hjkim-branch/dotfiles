@@ -1,5 +1,7 @@
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
 
@@ -7,7 +9,12 @@ alias start_jupyter='bazel run //config:switch_environment hjoonkim-ejnar ; baze
 alias ns_redeploy='bazel run //config:switch_environment hjoonkim ; bazel run //jupyter:deploy.delete ; bazel run //k8s_base:deploy.apply ; start_jupyter'
 alias jupyter_pf='kubectl port-forward jupyter-0-0 4040:4040'
 alias stop_jupyter='bazel run //config:switch_environment hjoonkim-ejnar ; bazel run //jupyter:deploy.delete'
+alias ga='git add'
 alias gb='git branch --sort=committerdate'
+alias gc='git commit -v'
+alias gco='git checkout'
+alias gcb='git checkout -b'
+alias gd='git diff'
 alias k='kubectl'
 alias kg='kubectl get'
 alias kgp='kubectl get pods | grep '
@@ -26,3 +33,6 @@ alias lcs2_local_db='bazel run discovery/local_content_v2/local_content_service:
 alias lcs_local='bazel run //discovery/local_content -- server ./discovery/local_content/local_config.yaml'
 alias local_jupyter='bazel run //jupyter:jupyter_notebook_local -- --notebook-dir ~/my_notebook'
 alias deploy_jupyter='bazel run //jupyter:deploy.apply'
+
+alias egrep='egrep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox}'
+alias fgrep='fgrep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox}'
