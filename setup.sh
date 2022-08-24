@@ -1,9 +1,12 @@
+#!/bin/bash
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
-ZSH_THEME="powerlevel10k/powerlevel10k"
+cp ~/.dotfiles/p10k.zsh ~/.p10k.zsh
 
+export ZSH=~/.oh-my-zsh
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 alias start_jupyter='bazel run //config:switch_environment hjoonkim-ejnar ; bazel run //jupyter:deploy.apply'
 alias ns_redeploy='bazel run //config:switch_environment hjoonkim ; bazel run //jupyter:deploy.delete ; bazel run //k8s_base:deploy.apply ; start_jupyter'
@@ -36,3 +39,6 @@ alias deploy_jupyter='bazel run //jupyter:deploy.apply'
 
 alias egrep='egrep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox}'
 alias fgrep='fgrep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox}'
+
+source $ZSH/oh-my-zsh.sh
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
